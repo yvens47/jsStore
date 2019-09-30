@@ -76,34 +76,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div clas='col-md-12'>
-
-            <ul class='products'>
-                <!-- <li class='col-md-4 product'>
-                    <div class="product_wrapper">
-                        <img class='img-fluid image'
-                            src="https://c.static-nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/vzu0e3wicxrsxlhxaj20/air-max-270-react-heavy-metal-mens-shoe-DcpzJF.jpg"
-                            alt="" srcset="">
-
-
-                        <div class="product-data">
-                            <div class='pdata-title'>
-                                <p class='name'>Nike Air Max 270 React (Heavy Metal)</p>
-                                <p class='type'>Men's shoes</p>
-                            </div>
-                            <div class='pdata-price'>
-                                <p class="price">$45.78</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                   
-                </li> -->
-
+         <ul class='products'>
+                
             </ul>
-        </div>
+           
 
         </div>
 

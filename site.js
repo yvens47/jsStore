@@ -33,7 +33,8 @@ var UI = (function () {
         // create list element;
         var product = document.createElement('li')
         product.classList.add('product');
-        product.className = 'col-md-4 product px-0';
+        product.className = 'col-md-3 product px-0';
+        product.style = 'width:24%';
 
         // product wrapper
         var productWrapper = document.createElement('div')
