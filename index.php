@@ -1,7 +1,25 @@
 <?php require 'templates/header.php' ?>
   <div class='row row-second'>
+            <div class=' mt-120 col-md-4 mx-auto'>
+
+            <h2 class="lead text-center lead-title mt-3" style=";">
+              Welcome  To JaxStore
+             </h2>
+             <hr>
+             <p class="text-center" style="color: white;">
+                Lorem ipsum dolor sit amet consectetur </p>
+                
+                <div class="input-group mb-3">
+                    <!-- <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div> -->
+                    <div class="custom-file">
+                            <input placeholder="search products" type="text" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" class="form-control" style="border: 0;border-radius: 0;">                        <label for="inputGroupFile01" class=" btn btn-primary" style="margin-top: 8px;border-radius: 0;"><i class="material-icons icons">search</i></label>                    </div>
+                    </div>
+
+            </div>
            
-        </div>
+    </div>
         <div class="row" id='categories'>
             <div class="col-md-12">
                 <h2 style="padding-top: 50px;" class=" animated infinite bounce categories latest text-center">Categories </h2>
