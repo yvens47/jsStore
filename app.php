@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-8">
               <select class="custom-select " id="genre">
-                <option selected>Choose...</option>
+                <option value='all' selected>Choose...</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="unisex">Unisex</option>
@@ -23,7 +23,7 @@
         </div>
         
     </div>
-    <div class="col-md-10 px-0 products-app">
+    <div class="col-md-10 px-0 products-app mb-3">
          <ul class='products'>
                 
         </ul>

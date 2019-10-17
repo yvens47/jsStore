@@ -1,6 +1,6 @@
 <?php require 'templates/header.php' ?>
 
-<div class="row mt-5">
+<div class="row mt-5 mb-5">
 
     <div class="col-md-6 mt-5">
 

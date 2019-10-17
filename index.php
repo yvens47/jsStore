@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-md-3 product px-0">
                     <div class="product_wrapper"><img class="image"
-                            src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i8vecggn51jcpoarwtw8/joyride-flyknit-cc3-obj-shoe-LPGQk6.jpg">
+                            src="https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/usw7dtve8vtx12vfwnzd/air-force-1-shadow-womens-shoe-zmjRFw.jpg">
                         <div class="product-data">
                             <div class="pdata-title">
                                 <p class="name"><a href="product.php?id=3" data-id="">product 3</a></p>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-md-3 product px-0">
                     <div class="product_wrapper"><img class="image"
-                            src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i8vecggn51jcpoarwtw8/joyride-flyknit-cc3-obj-shoe-LPGQk6.jpg">
+                            src="https://c.static-nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/li4rxwuxpbjcuth4eqn4/air-max-270-react-womens-shoe-6KXPPH.jpg">
                         <div class="product-data">
                             <div class="pdata-title">
                                 <p class="name"><a href="product.php?id=3" data-id="">product 3</a></p>

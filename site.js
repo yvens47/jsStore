@@ -180,12 +180,10 @@ var UI = (function() {
   var productsUl = document.querySelector(".products");
   var productsPage = document.querySelector(".products-page");
   var cartLink = document.querySelector(".cart-link");
-
   var genre = document.querySelector("#genre");
-
   var productList = document.querySelectorAll(".product"); // li product on app.php
-
   var uiContainer = [productsUl, productsPage, cartLink, genre, productList];
+
   return {
     uiList: uiContainer,
     createProduct: createProduct
@@ -200,6 +198,7 @@ class Cart {
 
 var app = (function(ui) {
   function filterProducts(products, filter) {
+    if (filter === "all") return products;
     const filteredProducts = products.filter(
       product => product.genre === filter
     );
