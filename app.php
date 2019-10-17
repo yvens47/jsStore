@@ -12,14 +12,18 @@
               <select class="custom-select " id="genre">
                 <option selected>Choose...</option>
                 <option value="male">Male</option>
-                <option value="felame">Female</option>
+                <option value="female">Female</option>
                 <option value="unisex">Unisex</option>
             </select>
             </div>
         </div>
+        <div id='app'>
+            <Search></Search>
+
+        </div>
         
     </div>
-    <div class="col-md-10 px-0">
+    <div class="col-md-10 px-0 products-app">
          <ul class='products'>
                 
         </ul>

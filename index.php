@@ -6,7 +6,7 @@
               Welcome  To JaxStore
              </h2>
              <hr>
-             <p class="text-center" style="color: #2e5167bd;">
+             <p class="text-center" style="color: #2e5167bd; font-weight:bold">
                 Lorem ipsum dolor sit amet consectetur </p>
                 
                 <div class="input-group mb-3">
@@ -15,7 +15,13 @@
                     </div> -->
                     <div class="custom-file">
                         <input placeholder="search products" type="text" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" class="form-control" style=" color: white ;border: 0;border-radius: 0;background: #2e51676b;border-radius: 40px 0px 0px 40px;">                    </div>
-                    <button class="btn btn-primary">Search</button>
+                    <button
+                    class="btn btn-primary"
+                    style="border-radius: 0;background: #5484b7;border: none;"
+                    >
+                    Search
+                    </button>
+
                     </div>
             </div>
            
