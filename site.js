@@ -9,7 +9,7 @@ var products = [
         }, color: ['red', 'blue Green ', 'pink'], type: "Men shoes",
     },
     {
-        id: "2", name: "Nike Zoom Fly 3", description: "1escription 1", genre: "unises",
+        id: "2", name: "Nike Zoom Fly 3", description: "1escription 1", genre: "unisex",
         price: "8.90", images: { defaut: "https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/cymb4xvvajcvrzxuskfp/joyride-run-flyknit-mens-running-shoe-LcCzGq.jpg", list: ['https://c.static-nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/espcz6icmjrewdc29bb4/zoom-fly-3-mens-running-shoe-xCbsJ0.jpg', 'https://c.static-nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/wa4li7j8fjwipwwjonyw/zoom-fly-3-mens-running-shoe-xCbsJ0.jpg', 'https://c.static-nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/ibezrefmlstjtc8etshr/zoom-fly-3-mens-running-shoe-xCbsJ0.jpg'] }, color: ['red', 'blue Green ', 'pink'], type: "Men running shoes",
     },
     {
@@ -133,8 +133,12 @@ var UI = (function () {
     var productsPage = document.querySelector('.products-page');
     var cartLink = document.querySelector('.cart-link');
 
+    var genre = document.querySelector('#genre');
 
-    var uiContainer = [productsUl, productsPage, cartLink];
+    var productList = document.querySelectorAll('.product'); // li product on app.php
+
+
+    var uiContainer = [productsUl, productsPage, cartLink, genre, productList];
     return {
         uiList: uiContainer,
         createProduct: createProduct,
@@ -170,6 +174,18 @@ var app = (function (ui) {
     //display each product from products
 
     displayAllProductsToUI(ulLists, ui);
+
+    console.log(ulLists[3])
+
+    console.log(window)
+    ulLists[3].addEventListener('change', function () {
+
+
+        console.log(ulLists[4]);
+        var productList = document.querySelectorAll('.product'); // li product on app.php
+        console.log(productList);
+
+    })
 
 
 

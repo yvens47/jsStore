@@ -9,11 +9,11 @@
                 Filter by
             </div>
             <div class="col-md-8">
-              <select class="custom-select" id="inputGroupSelect01">
+              <select class="custom-select " id="genre">
                 <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="male">Male</option>
+                <option value="felame">Female</option>
+                <option value="unisex">Unisex</option>
             </select>
             </div>
         </div>
