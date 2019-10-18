@@ -272,7 +272,7 @@ bg-light {
   padding: 0;
 
   padding: 10px;
-  top:45px;
+  top: 45px;
 }
 
 .lead-title {
@@ -286,6 +286,25 @@ bg-light {
   font-weight: bold;
 }
 
+.category {
+  border-bottom: solid #eee;
+  background: #f7f7f7;
+}
+.category img {
+  width: 30%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #fffdfd;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: solid 3px #c1d4e3;
+}
+.info h2 {
+  color: #959595;
+  font-size: 18px;
+  font-family: initial;
+}
 @media (max-width: 576px) {
   latest {
     margin-bottom: 15px;
@@ -320,7 +339,7 @@ bg-light {
     height: 400px;
   }
   .row-second {
-    height: 30vh;
+    height: 38vh;
     background-size: 100%;
     background-repeat: none;
     padding: 0px;

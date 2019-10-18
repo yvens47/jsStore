@@ -102,7 +102,7 @@ function dataStorage() {
 // all  html elements
 var UI = (function() {
   //takes and an object with productId, productName, productPrice productImages
-
+  //return a html li
   var createProduct = function(productDataObject) {
     // create list element;
     var product = document.createElement("li");
@@ -176,12 +176,14 @@ var UI = (function() {
     return product;
   };
 
-  // ul tag
+  // html element
   var productsUl = document.querySelector(".products");
   var productsPage = document.querySelector(".products-page");
   var cartLink = document.querySelector(".cart-link");
   var genre = document.querySelector("#genre");
   var productList = document.querySelectorAll(".product"); // li product on app.php
+
+  // add all html  element above the array
   var uiContainer = [productsUl, productsPage, cartLink, genre, productList];
 
   return {
@@ -192,12 +194,17 @@ var UI = (function() {
 
 class Cart {
   constructor() {
-    this.cart = [];
+    this.state = {
+      cart: []
+    };
   }
 }
 
-var app = (function(ui) {
-  function filterProducts(products, filter) {
+class Product {
+  constructor() {
+    this.products = products;
+  }
+  filterProducts(products, filter) {
     if (filter === "all") return products;
     const filteredProducts = products.filter(
       product => product.genre === filter
@@ -205,6 +212,16 @@ var app = (function(ui) {
 
     return filteredProducts;
   }
+
+  totalProducts() {
+    console.log(this.products.length);
+  }
+}
+
+var app = (function(ui) {
+  var product = new Product();
+  console.log(product);
+  product.totalProducts();
 
   // save product to local storage;
   dataStorage();
@@ -217,9 +234,13 @@ var app = (function(ui) {
   ulLists[3].addEventListener("change", function(e) {
     document.querySelector(".products").innerHTML = "";
     var productList = document.querySelectorAll(".product"); // li product on app.php
-    const resultSet = filterProducts(products, e.target.value.toLowerCase());
+    const resultSet = product.filterProducts(
+      products,
+      e.target.value.toLowerCase()
+    );
+    document.querySelector(".info").innerHTML =
+      "<h2> There are " + resultSet.length + " in this category<h2>";
     resultSet.forEach(function(item) {
-      console.log(item.id);
       document.querySelector(".products").appendChild(ui.createProduct(item));
     });
   });
