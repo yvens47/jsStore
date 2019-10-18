@@ -202,10 +202,12 @@ class Cart {
 
 class Product {
   constructor() {
-    this.products = products;
+    this.products = products.slice();
   }
+
   filterProducts(products, filter) {
     if (filter === "all") return products;
+
     const filteredProducts = products.filter(
       product => product.genre === filter
     );
@@ -220,34 +222,10 @@ class Product {
 
 var app = (function(ui) {
   var product = new Product();
-  console.log(product);
-  product.totalProducts();
-
   // save product to local storage;
-  dataStorage();
+  //dataStorage();
   var ulLists = ui.uiList;
   //display each product from products
-
-  displayAllProductsToUI(ulLists, ui);
-
-  // filter product array  when select is change
-  ulLists[3].addEventListener("change", function(e) {
-    document.querySelector(".products").innerHTML = "";
-    var productList = document.querySelectorAll(".product"); // li product on app.php
-    const resultSet = product.filterProducts(
-      products,
-      e.target.value.toLowerCase()
-    );
-    document.querySelector(".info").innerHTML =
-      "<h2> There are " + resultSet.length + " in this category<h2>";
-    resultSet.forEach(function(item) {
-      document.querySelector(".products").appendChild(ui.createProduct(item));
-    });
-  });
-
-  // console.log(ulLists[2])
-  var addToCartBtns = document.querySelectorAll(".addToCart"); // select all buttons
-
   var cart;
   var carStorage = window.localStorage;
 
@@ -256,6 +234,34 @@ var app = (function(ui) {
   } else {
     cart = [];
   }
+  var cartUpdate = document.querySelector(".cart");
+  cartUpdate.innerHTML = cart.length;
+
+  displayAllProductsToUI(product.filterProducts(products, "all"), ulLists, ui);
+  // console.log(ulLists[2])
+  var addToCartBtns = document.querySelectorAll(".addToCart"); // select all buttons
+
+  // filter product array  when select is change
+  ulLists[3].addEventListener("change", function(e) {
+    addToCartBtns = null; // reset all addtocart btns
+
+    document.querySelector(".products").innerHTML = "";
+    var productList = document.querySelectorAll(".product"); // li product on app.php
+
+    // filter results into resultset variable
+    const resultSet = product.filterProducts(
+      products,
+      e.target.value.toLowerCase()
+    );
+
+    document.querySelector(".info").innerHTML =
+      "<h2> There are " + resultSet.length + " in this category<h2>";
+
+    displayAllProductsToUI(resultSet, ulLists, ui); // display new filtered result to doc
+    var addToCartBtns = document.querySelectorAll(".addToCart"); //get the nee addtocart btns
+
+    addToCartBtnEvent(addToCartBtns, resultSet, cart, cartUpdate, carStorage); // add newvents
+  });
 
   var cartDisplayDiv = document.querySelector(".modal-body-ul");
 
@@ -266,40 +272,7 @@ var app = (function(ui) {
 
   // window.localStorage.setItem('cart', JSON.stringify(cart));
 
-  var cartUpdate = document.querySelector(".cart");
-
-  addToCartBtns.forEach(function(button) {
-    // add event Listener to each add to Cart Button
-
-    button.addEventListener("click", function(e) {
-      e.target.innerHTML = "Added";
-      e.target.setAttribute("disabled", false);
-
-      var productID = e.target.getAttribute("data-id"); // product id from  button attribute
-      var product = findAproductById(products, productID);
-      console.log(product);
-
-      // add new product  cart
-      cart.push(product);
-
-      cartUpdate.innerHTML = cart.length;
-
-      carStorage.setItem("cart", JSON.stringify(cart));
-      //console.log(JSON.parse(JSON.stringify(cart)));
-    });
-    cartUpdate.innerHTML = cart.length;
-  });
-
-  // product by id
-  function findAproductById(array, id) {
-    const result = array.filter(function(product) {
-      if (product.id === id) {
-        return product;
-      }
-    });
-
-    return result;
-  }
+  addToCartBtnEvent(addToCartBtns, products, cart, cartUpdate, carStorage);
 
   // view cart items
   function viewCartItems() {
@@ -317,12 +290,51 @@ var app = (function(ui) {
   }
 })(UI);
 
+function addToCartBtnEvent(
+  addToCartBtns,
+  resultSet,
+  cart,
+  cartUpdate,
+  carStorage
+) {
+  addToCartBtns.forEach(function(button) {
+    // add event Listener to each add to Cart Button
+    button.addEventListener("click", function(e) {
+      e.target.innerHTML = "Added";
+      e.target.setAttribute("disabled", false);
+      var productID = e.target.getAttribute("data-id"); // product id from  button attribute
+
+      var product = findAproductById(resultSet, productID);
+      //console.log(product);
+
+      // add new product  cart
+      cart.push(product);
+      cartUpdate.innerHTML = cart.length;
+      carStorage.setItem("cart", JSON.stringify(cart));
+      console.log(JSON.parse(JSON.stringify(cart)));
+    });
+    //cartUpdate.innerHTML = cart.length;
+  });
+}
+
 // display all products to the screen
-function displayAllProductsToUI(ulLists, ui) {
+function displayAllProductsToUI(arrayProduct, ulLists, ui) {
+  var products = arrayProduct;
   if (ulLists[0] !== null || uiList[0] !== undefined) {
     products.forEach(function(item, index) {
       //add list the ul element
       ulLists[0].appendChild(ui.createProduct(item));
     });
   }
+}
+
+// product by id
+function findAproductById(array, id) {
+  const result = array.filter(function(product) {
+    if (product.id === id) {
+      return product;
+    }
+  });
+
+  return result;
 }
