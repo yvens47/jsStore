@@ -260,6 +260,13 @@ bg-light {
 .product-view {
   /* padding: 60px 33px; */
 }
+.cart {
+  width: 500px;
+  margin-top: 5px;
+  height: auto;
+  overflow: auto;
+  background: #f8f9fa;
+}
 
 .mt-120 {
   margin-top: 50px;
@@ -338,6 +345,7 @@ bg-light {
     float: left;
     height: 400px;
   }
+
   .row-second {
     height: 38vh;
     background-size: 100%;
@@ -354,7 +362,7 @@ bg-light {
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .row-second {
-    height: 80vh;
+    height: 85vh;
     background-size: 100%;
     background-repeat: none;
     padding: 50px;

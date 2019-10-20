@@ -192,13 +192,97 @@ var UI = (function() {
   };
 })();
 
-class Cart {
-  constructor() {
-    this.state = {
-      cart: []
-    };
+/* cart **/
+var Cart = {};
+Cart.items = [];
+Cart.init = function() {
+  var items = localStorage.getItem("cart-items");
+  if (items) {
+    Cart.items = JSON.parse(items);
+  } else {
+    Cart.items = [];
   }
-}
+
+  return Cart;
+};
+
+Cart.itemInCart = function isItemInCart(id) {
+  let i = 0;
+
+  for (; i < Cart.items.length; i++) {
+    if (Cart.items[i].id === id) return i;
+  }
+
+  return null;
+};
+// view cart items
+Cart.viewCartItems = function() {
+  var items = Cart.items; //JSON.parse(window.localStorage.getItem("cart"));
+  const cart = document.querySelector(".cart-view");
+  console.log("view cart", Cart.items);
+  
+
+  if (items.length === 0) {
+    cart.innerHTML = "<h2> Your car is empty</h2>";
+  } else if (items.length === 1) {
+    cart.innerHTML =
+      "<div><p> Id: " +
+      items[0].id +
+      "</p>" +
+      "<h2>" +
+      "<p> Qty " +
+      items[0].id +
+      "</p>" +
+      " <p>Name: " +
+      items[0].name +
+      "</p>" +
+      "<span>Price" +
+      items[0].price +
+      "</span></div>";
+  } else {
+   // cart.innerHTML = Cart.items;
+
+    items.forEach((value, index) => {
+      console.log(value[index]);
+      cart.innerHTML =
+        "<div><p> Id: " +
+        value[index].id +
+        "</p>" +
+        "<h2>" +
+        "<p> Qty " +
+        value[index].id +
+        "</p>" +
+        " <p>Name: " +
+        value[index].name +
+        "</p>" +
+        "<span>Price" +
+        value[index].price +
+        "</span></div>";
+    });
+  }
+};
+
+Cart.addItem = function(item) {
+  console.log('inside additem', item)
+  if (!item.qty) item.qty = 1;
+  //check if item is already added
+  let index = Cart.itemInCart(item.id);
+
+  if (index === null) {
+    console.log(Cart.items);
+
+    Cart.items.push(item);
+  } else {
+    // update qty of the specific item;
+    // console.log("will update qty of the item", item);
+
+    Cart.items[index].qty += item.qty;
+  }
+
+  return Cart;
+};
+
+/* cart ends here **/
 
 class Product {
   constructor() {
@@ -229,13 +313,10 @@ var app = (function(ui) {
   var cart;
   var carStorage = window.localStorage;
 
-  if (carStorage.getItem("cart")) {
-    cart = JSON.parse(carStorage.getItem("cart"));
-  } else {
-    cart = [];
-  }
+  Cart.init();
+
   var cartUpdate = document.querySelector(".cart");
-  cartUpdate.innerHTML = cart.length;
+  //cartUpdate.innerHTML = Cart.items.length;
 
   displayAllProductsToUI(product.filterProducts(products, "all"), ulLists, ui);
   // console.log(ulLists[2])
@@ -247,7 +328,6 @@ var app = (function(ui) {
 
     document.querySelector(".products").innerHTML = "";
     var productList = document.querySelectorAll(".product"); // li product on app.php
-
     // filter results into resultset variable
     const resultSet = product.filterProducts(
       products,
@@ -260,34 +340,25 @@ var app = (function(ui) {
     displayAllProductsToUI(resultSet, ulLists, ui); // display new filtered result to doc
     var addToCartBtns = document.querySelectorAll(".addToCart"); //get the nee addtocart btns
 
-    addToCartBtnEvent(addToCartBtns, resultSet, cart, cartUpdate, carStorage); // add newvents
+    addToCartBtnEvent(addToCartBtns, resultSet, Cart, cartUpdate, carStorage); // add newvents
   });
 
   var cartDisplayDiv = document.querySelector(".modal-body-ul");
 
   // add click event to cart link
-  ulLists[2].addEventListener("click", function() {
-    viewCartItems();
-  });
+  ulLists[2].addEventListener(
+    "click",
+    function() {
+      //Cart.viewCartItems();
+      setTimeout(function() {
+        Cart.viewCartItems();
+      });
+    },
+    10
+  );
 
   // window.localStorage.setItem('cart', JSON.stringify(cart));
-
-  addToCartBtnEvent(addToCartBtns, products, cart, cartUpdate, carStorage);
-
-  // view cart items
-  function viewCartItems() {
-    var items = JSON.parse(window.localStorage.getItem("cart"));
-    if (items.length === 0) {
-      alert("your cart is empty");
-    } else {
-      items.forEach(function(value) {
-        var productItem = document.createElement("li"); // crate list item
-        productItem.innerHTML = value[0].name + " " + "$" + value[0].price;
-
-        cartDisplayDiv.appendChild(productItem); //add to unordered list
-      });
-    }
-  }
+  addToCartBtnEvent(addToCartBtns, products, Cart, cartUpdate, carStorage);
 })(UI);
 
 function addToCartBtnEvent(
@@ -305,13 +376,17 @@ function addToCartBtnEvent(
       var productID = e.target.getAttribute("data-id"); // product id from  button attribute
 
       var product = findAproductById(resultSet, productID);
-      //console.log(product);
 
-      // add new product  cart
-      cart.push(product);
-      cartUpdate.innerHTML = cart.length;
-      carStorage.setItem("cart", JSON.stringify(cart));
-      console.log(JSON.parse(JSON.stringify(cart)));
+      //cart.items.push(product);
+      // cart.addItem(product);
+      console.log(product[0]);
+      Cart.addItem(product[0]);
+      // Cart.addItem(products[2]);
+      // Cart.addItem(products[1]);
+      // Cart.addItem(products[0]);
+
+      // cartUpdate.innerHTML = cart.items.length;
+      // carStorage.setItem("cart", JSON.stringify(cart));
     });
     //cartUpdate.innerHTML = cart.length;
   });

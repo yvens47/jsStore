@@ -19,7 +19,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">JaxStore</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -57,10 +57,35 @@
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active cart-link" data-toggle="modal" data-target="#exampleModal">
+                    <!-- <li class="nav-item active cart-link" data-toggle="modal" data-target="#exampleModal">
                         <a class="nav-link" href="#">
                             <i class="material-icons">add_shopping_cart</i><span class='cart'>Cart </span></a>
+                    </li> -->
+                    <li class="nav-item dropdown show cart-link">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">add_shopping_cart</i><span class='cart'>Cart </span>
+                        </a>
+                        <div style='width: 500px;
+                                    margin-top: 5px;
+                                    height: auto;
+                                    overflow: auto;
+                                    background: #f8f9fa;
+                                    padding: 10px 10px;
+  ' class="dropdown-menu dropdown-menu-right cart-view" aria-labelledby="navbarDropdownMenuLink">
+                            
+        <table class="table">
+            <thead>
+                <th>Product Id</th>
+                <th> Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </thead>
+            <tbody class='table-body'></tbody>
+        </table>
+                        </div>
                     </li>
+                    
                     
                     
                 </ul>

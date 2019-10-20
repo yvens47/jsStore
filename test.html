@@ -1,38 +1,52 @@
-<button
-  class="btn btn-primary"
-  style="border-radius: 0;background: #5484b7;border: none;"
->
-  Search
-</button>
-<div class="row">
-  <div class="col-md-4">
-    <img
-      src="https://cdn4.iconfinder.com/data/icons/blue-real-estate/64/Real_Estate_Loan_House-09-512.png"
-      class="lead-img img-fluid"
-    />
-    <p>
-      Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
-      consectetur
-    </p>
-  </div>
-  <div class="col-md-4">
-    <img
-      src="https://cdn3.iconfinder.com/data/icons/real-estate-20/512/1-33-512.png"
-      class=" lead-img img-fluid"
-    />
-    <p>
-      Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
-      consectetur
-    </p>
-  </div>
-  <div class="col-md-4">
-    <img
-      src="https://image.flaticon.com/icons/png/512/48/48861.png"
-      class=" lead-img img-fluid"
-    />
-    <p>
-      Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
-      consectetur
-    </p>
-  </div>
-</div>
+<script>
+  var products = [
+    { id: "1", name: "p1", price: 34 },
+    { id: "2", name: "p2", price: 4 },
+    { id: "3", name: "p3", price: 3 }
+  ];
+
+  var Cart = {};
+
+  Cart.items = [];
+
+  function isItemInCart(id) {
+    let i = 0;
+    for (; i < Cart.items.length; i++) {
+      if (Cart.items[i].id === id) return i;
+    }
+
+    return null;
+  }
+
+  function addItem(item) {
+    if (!item.qty) item.qty = 1;
+    //check if item is already added
+    let index = isItemInCart(item.id);
+    if (index === null) {
+      Cart.items.push(item);
+    } else {
+      // update qty of the specific item;
+      // console.log("will update qty of the item", item);
+
+      Cart.items[index].qty += item.qty;
+    }
+
+    return Cart;
+  }
+
+  addItem(products[0]);
+  addItem(products[2]);
+  addItem(products[1]);
+  addItem({ id: "1", name: "p1", price: 34, qty: 2 });
+  addItem({ id: "2", name: "p2", price: 34, qty: 7 });
+
+  //console.log(Cart);
+
+  // print
+  Cart.items.forEach((item, index) => {
+    console.log(
+      "bought " + item.qty,
+      " " + item.name + " for a total of  " + item.qty * item.price
+    );
+  });
+</script>
