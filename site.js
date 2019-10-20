@@ -176,15 +176,31 @@ var UI = (function() {
     return product;
   };
 
+  var createtableView = function() {
+    var table = document.querySelector("table");
+
+    // table head
+
+    return table;
+  };
+
   // html element
   var productsUl = document.querySelector(".products");
   var productsPage = document.querySelector(".products-page");
   var cartLink = document.querySelector(".cart-link");
   var genre = document.querySelector("#genre");
   var productList = document.querySelectorAll(".product"); // li product on app.php
+  var cartTableView = document.querySelector(".cart-table");
 
   // add all html  element above the array
-  var uiContainer = [productsUl, productsPage, cartLink, genre, productList];
+  var uiContainer = [
+    productsUl,
+    productsPage,
+    cartLink,
+    genre,
+    productList,
+    cartTableView
+  ];
 
   return {
     uiList: uiContainer,
@@ -208,62 +224,51 @@ Cart.init = function() {
 
 Cart.itemInCart = function isItemInCart(id) {
   let i = 0;
-
   for (; i < Cart.items.length; i++) {
     if (Cart.items[i].id === id) return i;
   }
-
   return null;
 };
+
 // view cart items
 Cart.viewCartItems = function() {
+  var tableBody = UI.uiList[5].querySelector(".table-body");
   var items = Cart.items; //JSON.parse(window.localStorage.getItem("cart"));
   const cart = document.querySelector(".cart-view");
-  console.log("view cart", Cart.items);
-  
+  tableBody.innerHTML = "";
 
-  if (items.length === 0) {
-    cart.innerHTML = "<h2> Your car is empty</h2>";
-  } else if (items.length === 1) {
-    cart.innerHTML =
-      "<div><p> Id: " +
-      items[0].id +
-      "</p>" +
-      "<h2>" +
-      "<p> Qty " +
-      items[0].id +
-      "</p>" +
-      " <p>Name: " +
-      items[0].name +
-      "</p>" +
-      "<span>Price" +
-      items[0].price +
-      "</span></div>";
-  } else {
-   // cart.innerHTML = Cart.items;
-
+  if (Cart.size() === 0)
+    return (tableBody.innerHTML =
+      "<p class='lead'>You don't have any items in your cart.</p>");
+  else {
     items.forEach((value, index) => {
-      console.log(value[index]);
-      cart.innerHTML =
-        "<div><p> Id: " +
-        value[index].id +
-        "</p>" +
-        "<h2>" +
-        "<p> Qty " +
-        value[index].id +
-        "</p>" +
-        " <p>Name: " +
-        value[index].name +
-        "</p>" +
-        "<span>Price" +
-        value[index].price +
-        "</span></div>";
+      var tableRow = document.createElement("tr");
+
+      tableRow.innerHTML =
+        "<td>" +
+        value.id +
+        " </td>" +
+        "<td>" +
+        value.name +
+        "</td><td>" +
+        value.price +
+        "<td><td>" +
+        value.qty +
+        "</td>" +
+        "<td><td>" +
+        "$" +
+        value.qty * value.price +
+        "</td>";
+      tableBody.appendChild(tableRow);
+
+      // UI.uiList[5].appendChild();
     });
   }
+
+  // UI.uiList[5].
 };
 
 Cart.addItem = function(item) {
-  console.log('inside additem', item)
   if (!item.qty) item.qty = 1;
   //check if item is already added
   let index = Cart.itemInCart(item.id);
@@ -273,13 +278,17 @@ Cart.addItem = function(item) {
 
     Cart.items.push(item);
   } else {
-    // update qty of the specific item;
-    // console.log("will update qty of the item", item);
-
     Cart.items[index].qty += item.qty;
   }
 
   return Cart;
+};
+Cart.size = function() {
+  return this.items.length;
+};
+
+Cart.emptyCart = function() {
+  return (this.items = []);
 };
 
 /* cart ends here **/
@@ -377,13 +386,7 @@ function addToCartBtnEvent(
 
       var product = findAproductById(resultSet, productID);
 
-      //cart.items.push(product);
-      // cart.addItem(product);
-      console.log(product[0]);
       Cart.addItem(product[0]);
-      // Cart.addItem(products[2]);
-      // Cart.addItem(products[1]);
-      // Cart.addItem(products[0]);
 
       // cartUpdate.innerHTML = cart.items.length;
       // carStorage.setItem("cart", JSON.stringify(cart));

@@ -66,7 +66,7 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="material-icons">add_shopping_cart</i><span class='cart'>Cart </span>
                         </a>
-                        <div style='width: 500px;
+                        <div style='width: 900px;
                                     margin-top: 5px;
                                     height: auto;
                                     overflow: auto;
@@ -74,14 +74,23 @@
                                     padding: 10px 10px;
   ' class="dropdown-menu dropdown-menu-right cart-view" aria-labelledby="navbarDropdownMenuLink">
                             
-        <table class="table">
+        <table class="table cart-table table-striped">
             <thead>
                 <th>Product Id</th>
                 <th> Name</th>
                 <th>Price</th>
-                <th>Quantity</th>
+                <th>Qty</th>
+                <th>Line Price</th>
             </thead>
             <tbody class='table-body'></tbody>
+            <tfoot>
+                <tr>
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+            </tfoot>
         </table>
                         </div>
                     </li>
